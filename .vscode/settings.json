@@ -1,0 +1,11 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "css": "css",
+    "scss": "css",
+    "postcss": "css"
+  },
+  "css.validate": false,
+  "scss.validate": false,
+  "postcss.validate": false,
+  "tailwindCSS.experimental.configFile": "./config/tailwind.config.js"
+}
