@@ -1,0 +1,19 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["renderer/components/*"],
+      "@api/*": ["api/*"],
+      "@types/*": ["types/*"]
+    },
+    "jsx": "react-jsx",        // Allows JSX syntax
+    "module": "commonjs",
+    "target": "es6",
+    "allowJs": true,           // Optional: Allow JavaScript files
+    "esModuleInterop": true,   // Optional: Makes default imports work correctly
+    "skipLibCheck": true       // Optional: Skips type checking of declaration files for faster builds
+  },
+  "include": ["src"],          // Ensures src directory is included
+  "exclude": ["node_modules"]
+}
