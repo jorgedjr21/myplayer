@@ -1,43 +1,9 @@
 /* src/styles/tailwind.css */
 @import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-faculty;
-}
-
-.responsive-card {
-  width: 100%;
-  height: auto;
-}
-
-@media (min-width: 640px) { /* Small screens */
-  .responsive-card {
-    width: 200px;
-    height: 300px;
-  }
-}
-
-@media (min-width: 768px) { /* Medium screens */
-  .responsive-card {
-    width: 240px;
-    height: 360px;
-  }
-}
-
-@media (min-width: 1024px) { /* Large screens */
-  .responsive-card {
-    width: 300px;
-    height: 450px;
-  }
-}
-
-@media (min-width: 1280px) { /* Extra-large screens */
-  .responsive-card {
-    width: 400px;
-    height: 600px;
-  }
-}
+@import "./custom.css"

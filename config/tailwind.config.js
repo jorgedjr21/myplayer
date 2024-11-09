@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         faculty: ['"Faculty Glyphic"', 'sans-serif'],
+        bebas: ['Bebas Neue', 'sans-serif'],
       },
     },
   },

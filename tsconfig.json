@@ -1,19 +1,19 @@
-// tsconfig.json
 {
   "compilerOptions": {
+    "outDir": "./dist", // Output all compiled files to the 'dist' directory
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["renderer/components/*"],
       "@api/*": ["api/*"],
       "@types/*": ["types/*"]
     },
-    "jsx": "react-jsx",        // Allows JSX syntax
+    "jsx": "react-jsx",
     "module": "commonjs",
     "target": "es6",
-    "allowJs": true,           // Optional: Allow JavaScript files
-    "esModuleInterop": true,   // Optional: Makes default imports work correctly
-    "skipLibCheck": true       // Optional: Skips type checking of declaration files for faster builds
+    "allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["src"],          // Ensures src directory is included
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,0 +1,40 @@
+body {
+  @apply font-bebas;
+}
+
+.responsive-card {
+  width: 100%;
+  height: auto;
+}
+
+.custom-tracking {
+  letter-spacing: 0.05em; /* Adjust this value as needed */
+}
+
+@media (min-width: 640px) { /* Small screens */
+  .responsive-card {
+    width: 200px;
+    height: 300px;
+  }
+}
+
+@media (min-width: 768px) { /* Medium screens */
+  .responsive-card {
+    width: 240px;
+    height: 360px;
+  }
+}
+
+@media (min-width: 1024px) { /* Large screens */
+  .responsive-card {
+    width: 300px;
+    height: 450px;
+  }
+}
+
+@media (min-width: 1280px) { /* Extra-large screens */
+  .responsive-card {
+    width: 400px;
+    height: 600px;
+  }
+}

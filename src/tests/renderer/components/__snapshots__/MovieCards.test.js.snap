@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCard matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="movie-card relative bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-200 max-w-[400px] xl:max-h-[600px] cursor-pointer"
+  >
+    <img
+      alt="Movie Title"
+      class="w-full h-auto sm:w-[200px] sm:h-[300px] md:w-[240px] md:h-[360px] lg:w-[300px] lg:h-[450px] xl:w-[400px] xl:h-[600px] object-cover"
+      src="https://yts.mx/assets/images/movies/vettaiyan_2024/large-cover.jpg"
+    />
+    <div
+      class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent"
+    />
+    <div
+      class="absolute bottom-4 left-2 right-2 text-white font-semibold text-center px-2 space-y-1"
+    >
+      <h3
+        class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
+      >
+        Movie Title
+      </h3>
+      <div
+        class="flex items-center justify-center space-x-4 text-sm sm:text-base"
+      >
+        <span
+          class="bg-gray-900 bg-opacity-75 px-2 py-1 rounded-md"
+        >
+          2024
+        </span>
+        <span
+          class="flex items-center bg-gray-900 bg-opacity-75 px-2 py-1 rounded-md"
+        >
+          <svg
+            class="w-4 h-4 text-yellow-400 mr-1"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+          8.8/10
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

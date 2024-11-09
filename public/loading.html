@@ -1,0 +1,60 @@
+<!-- public/loading.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <title>Loading...</title>
+  <style>
+    /* Ensure full height and center alignment */
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Bebas Neue', sans-serif;
+      background-color: #202020; /* Dark background */
+      color: #e50914; /* Netflix red color */
+    }
+
+    /* Center container */
+    .center-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Spinner styling */
+    .spinner {
+      border: 8px solid rgba(255, 255, 255, 0.2); /* Light translucent border */
+      border-top: 8px solid #e50914; /* Netflix red color for the animated part */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px; /* Space between spinner and text */
+    }
+
+    .custom-tracking {
+      letter-spacing: 0.05em; /* Adjust this value as needed */
+    }
+
+    /* Animation for the spinner */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="center-container">
+    <div class="spinner"></div>
+    <p class="custom-tracking">Loading application...</p>
+  </div>
+</body>
+</html
