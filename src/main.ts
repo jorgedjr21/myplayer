@@ -6,6 +6,7 @@ function createWindow() {
   let mainWindow = new BrowserWindow({
     width: 1600,
     height: 900,
+    icon: path.resolve(__dirname, 'assets/icons/pipoca.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
