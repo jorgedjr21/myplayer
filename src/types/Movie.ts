@@ -5,3 +5,8 @@ export interface Movie {
   rating: number;
   year: number;
 }
+
+export interface MoviesResponse {
+  movies: Movie[];
+  movieCount: number;
+}

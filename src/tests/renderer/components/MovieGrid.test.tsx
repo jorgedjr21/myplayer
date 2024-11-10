@@ -1,4 +1,5 @@
 import React from "react";
+import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MovieGrid from "@components/MovieGrid";
@@ -10,27 +11,20 @@ jest.mock('@api/movies', () => ({
 
 describe('MovieGrid', () => {
   const mockMovies = [
-    {
-      id: 1,
-      title: 'Test Movie 1',
-      large_cover_image: 'https://via.placeholder.com/400x600?text=Test+Movie+1',
-      rating: 8.5,
-      year: 2023,
-    },
-    {
-      id: 2,
-      title: 'Test Movie 2',
-      large_cover_image: 'https://via.placeholder.com/400x600?text=Test+Movie+2',
-      rating: 7.8,
-      year: 2022,
-    },
-  ]
+    { id: 1, title: 'Movie 1', large_cover_image: 'image1.jpg', rating: 8.1, year: 2021 },
+    { id: 2, title: 'Movie 2', large_cover_image: 'image2.jpg', rating: 7.5, year: 2020 },
+  ];
 
   test('renders movies after fetching data', async () => {
     // Set up the mock implementation for fetchMovies
-    (fetchMovies as jest.Mock).mockResolvedValue(mockMovies);
+    (fetchMovies as jest.Mock).mockResolvedValue({
+      movies: mockMovies,
+      movieCount: mockMovies.length,
+    });
 
-    render(<MovieGrid />);
+    render(<MemoryRouter>
+      <MovieGrid />
+    </MemoryRouter>);
 
     // Check for loading spinner or text if your component displays it
     expect(screen.getByText(/loading.../i)).toBeInTheDocument();
@@ -42,17 +36,20 @@ describe('MovieGrid', () => {
         expect(screen.getByText(`${movie.rating}/10`)).toBeInTheDocument();
         expect(screen.getByText(movie.year.toString())).toBeInTheDocument();
       });
-    });
+    })
   });
 
   test('displays no movies found message if fetchMovies returns an empty array', async () => {
-    (fetchMovies as jest.Mock).mockResolvedValue([]); // Mock an empty response
+    (fetchMovies as jest.Mock).mockResolvedValue({
+      movies: [],
+      moviesCount: 0
+    }); // Mock an empty response
 
-    render(<MovieGrid />);
+    render(<MemoryRouter>
+      <MovieGrid />
+    </MemoryRouter>);
 
-    await waitFor(() => {
-      expect(screen.getByText(/no movies found/i)).toBeInTheDocument();
-    });
+    await expect(screen.findByText(/No movies found./i)).resolves.toBeInTheDocument();
   });
 
   test('handles fetchMovies error and displays an error message', async () => {
@@ -60,11 +57,11 @@ describe('MovieGrid', () => {
     (fetchMovies as jest.Mock).mockRejectedValue(error); // Mock a fetch error
     const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    render(<MovieGrid />);
+    render(<MemoryRouter>
+      <MovieGrid />
+    </MemoryRouter>);
 
-    await waitFor(() => {
-      expect(screen.getByText(/No movies found./i)).toBeInTheDocument();
-    });
+    await expect(screen.findByText(/Failed to load movies. Please try again later./i)).resolves.toBeInTheDocument();
 
     expect(consoleErrorMock).toHaveBeenCalledWith('Error loading movies', error);
 

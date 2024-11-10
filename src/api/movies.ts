@@ -1,21 +1,25 @@
-import { Movie } from '../types/Movie';
+import { Movie, MoviesResponse } from '../types/Movie';
 import { MovieDetails } from '../types/MovieDetails';
 
 const BASE_URL = 'https://yts.mx/api/v2';
 
-export const fetchMovies = async (): Promise<Movie[]> => {
+export const fetchMovies = async (page: number = 1, limit: number = 20): Promise<MoviesResponse> => {
   try {
-    const response = await fetch(`${BASE_URL}/list_movies.json`);
+    const response = await fetch(`${BASE_URL}/list_movies.json?page=${page}&limit=${limit}`);
     const data = await response.json();
 
     if (data.status == 'ok') {
-      return data.data.movies.map((movie: any) => ({
+      const movies = data.data.movies.map((movie: any) => ({
         id: movie.id,
         title: movie.title,
         large_cover_image: movie.large_cover_image,
         rating: movie.rating,
         year: movie.year,
       }));
+
+      const movieCount = data.data.movie_count; // Total number of movies
+
+      return { movies, movieCount };
     }else {
       throw new Error('Failed to fetch movies');
     }
