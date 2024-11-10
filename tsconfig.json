@@ -5,7 +5,8 @@
     "paths": {
       "@components/*": ["renderer/components/*"],
       "@api/*": ["api/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@styles/*": ["styles/*"] 
     },
     "jsx": "react-jsx",
     "module": "commonjs",

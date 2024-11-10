@@ -25,11 +25,6 @@ const MovieGrid: React.FC = () => {
     loadMovies();
   }, []);
 
-  const handleCardClick = (movie: Movie) => {
-    console.log('Clicked on movie:', movie.title); // Perform any action here
-    // For example, open a modal with details, or navigate to a details page
-  };
-
 
   if(loading) {
     return <Spinner/>
@@ -45,11 +40,11 @@ const MovieGrid: React.FC = () => {
         movies.map((movie) => (
           <MovieCard 
             key={movie.id} 
+            id={movie.id}
             title={movie.title} 
             image_url={movie.large_cover_image}
             rating={movie.rating}
             year={movie.year}
-            onClick={() => handleCardClick(movie)}
             />
         ))
       }

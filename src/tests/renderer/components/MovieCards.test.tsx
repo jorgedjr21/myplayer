@@ -6,6 +6,7 @@ import MovieCard from '@components/MovieCard'
 
 describe('MovieCard', () => {
   const movieProps = {
+    id: 22,
     title: 'Movie Title',
     image_url: 'https://yts.mx/assets/images/movies/vettaiyan_2024/large-cover.jpg',
     rating: 8.8,
@@ -53,16 +54,6 @@ describe('MovieCard', () => {
     render(<MovieCard {...movieProps} />);
     const cardElement = screen.getByText(movieProps.title).parentElement?.parentElement;
     expect(cardElement).toHaveClass('hover:scale-105');
-  });
-
-  test('calls onClick handler when clicked', () => {
-    const handleClick = jest.fn();
-    render(<MovieCard {...movieProps} onClick={handleClick} />);
-  
-    const cardElement = screen.getByText(movieProps.title).parentElement?.parentElement;
-    cardElement && cardElement.click();
-  
-    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
   test('does not display rating if not provided', () => {

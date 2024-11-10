@@ -1,18 +1,16 @@
-import React, { useEffect} from 'react';
-
-import Banner from './components/Banner';
-import MovieGrid from './components/MovieGrid';
-import Navbar from './components/Navbar';
+import React from 'react';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import MoviesList from '@components/MoviesList';
+import MovieDetails from '@components/MovieDetails';
 
 const App: React.FC = () => {
   return (
-    <div className="bg-black min-h-screen text-white">
-      <Navbar />
-      <main className="pt-16"> {/* Adds padding for fixed navbar */}
-        <Banner />
-        <MovieGrid />
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MoviesList />} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
+      </Routes>
+    </Router>
   );
 };
 
