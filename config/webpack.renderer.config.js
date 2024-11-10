@@ -51,13 +51,11 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, '../dist'),
     },
     port: 3000,
-    hot: false, // Disable HMR to prevent Node.js dependencies in renderer
-    liveReload: true, // Use full-page reloads instead of HMR
-    devMiddleware: {
-      writeToDisk: true,
-    },
+    hot: true, // Enable hot reloading
+    open: true, // Automatically open the app in the browser
+    historyApiFallback: true // Needed for React Router in single-page apps
   },
 };

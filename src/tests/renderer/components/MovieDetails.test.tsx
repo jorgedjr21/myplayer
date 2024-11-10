@@ -36,6 +36,7 @@ const mockMovieDetails: MovieDetailsType = {
       type: 'bluray',
       seeds: 150,
       peers: 50,
+      hash: "12321321",
     },
     {
       quality: '720p',
@@ -44,6 +45,7 @@ const mockMovieDetails: MovieDetailsType = {
       type: 'web',
       seeds: 100,
       peers: 30,
+      hash: "12321321",
     },
   ],
   yt_trailer_code: 'mockTrailerCode',
@@ -110,6 +112,6 @@ describe('MovieDetails Component', () => {
     await waitFor(() => expect(screen.queryByTestId('spinner')).not.toBeInTheDocument());
 
     // Check if the "not found" message is displayed
-    expect(screen.getByText(/Movie details not found/i)).toBeInTheDocument();
+    expect(screen.getByText(/Movie details not found./i)).toBeInTheDocument();
   });
 });

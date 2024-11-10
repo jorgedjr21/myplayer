@@ -17,7 +17,7 @@ const MediaTabs: React.FC<MediaTabsProps> = ({ trailerCode, screenshots }) => {
     width: '100%',
     height: '390',
     playerVars: {
-      autoplay: 1,
+      autoplay: 0,
       mute: 0,  // Ensure that mute is disabled
     },
   };

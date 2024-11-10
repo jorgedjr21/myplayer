@@ -15,14 +15,25 @@ const MovieDetails: React.FC = () => {
   const navigate = useNavigate(); // Initialize the navigate function
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getMovieDetails = async () => {
-      setLoading(true)
-      const movieData = await fetchMovieDetails(Number(id));
-      setMovie(movieData);
-      setLoading(false);
-    }
+      try {
+        setLoading(true);
+        const movieData = await fetchMovieDetails(Number(id));
+        if (movieData) {
+          setMovie(movieData);
+        } else {
+          setError("Movie details not found.");
+        }
+      } catch (err) {
+        console.error("Error fetching movie details:", err);
+        setError("Failed to load movie details. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
     getMovieDetails();
   }, [id]);
@@ -31,8 +42,20 @@ const MovieDetails: React.FC = () => {
     return <Spinner />
   }
 
-  if(!movie) {
-    return <p>Movie details not found</p>;
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-center text-white bg-red-600 px-6 py-3 rounded-md shadow-lg">
+          {error}
+        </p>
+      </div>
+    );
+  }
+
+  const handleOnPlay = (movie_hash) => {
+    if (movie_hash && movie?.id) {
+      navigate(`/movie/${movie.id}/hash/${movie_hash}/play`);
+    }
   }
 
   return (
@@ -52,18 +75,19 @@ const MovieDetails: React.FC = () => {
 
     {/* Main Content */}
     <div className="relative z-20 flex flex-col items-center w-11/12 max-w-2xl p-6 bg-black bg-opacity-80 rounded-lg shadow-lg mt-16 space-y-6 lg:max-w-5xl lg:p-12">
-      <HeaderSection title={movie.title} likeCount={movie.like_count} onPlay={() => {
-        // Handle play action here, e.g., open a video player
-        console.log("Play button clicked");
-      }} />
+      <HeaderSection title={movie.title} likeCount={movie.like_count} availableQualities={movie.torrents} onPlay={handleOnPlay} />
       
       <MovieInfo rating={movie.rating} runtime={movie.runtime} year={movie.year} genres={movie.genres} />
       
-      <Description text={movie.description_full} />
-
       <MediaTabs trailerCode={movie.yt_trailer_code} screenshots={movie.screenshots} />
+
+      {/* Description Section */}
+      {movie.description_full ? (
+          <Description text={movie.description_full} />
+        ) : (
+          <p className="text-gray-400 italic">No description available</p>
+        )}
       
-      <Torrents torrents={movie.torrents} />
     </div>
   </div>
   );

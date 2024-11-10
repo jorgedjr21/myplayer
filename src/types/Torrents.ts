@@ -5,4 +5,5 @@ export interface Torrent {
   size: string;
   seeds: number;
   peers: number;
+  hash: string
 }

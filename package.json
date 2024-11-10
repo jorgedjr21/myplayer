@@ -3,19 +3,9 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "scripts": {
-    "dev:main": "webpack --config config/webpack.main.config.js --watch",
-    "dev:renderer": "webpack serve --config config/webpack.renderer.config.js",
-    "dev": "concurrently --kill-others --success first \"npm run dev:main\" \"npm run dev:renderer\" \"cross-env ELECTRON_DEV=1 electron .\"",
-    "electron": "electron .",
-    "build-main": "webpack --config config/webpack.main.config.js",
-    "build-renderer": "webpack --config config/webpack.renderer.config.js",
-    "build-preload": "webpack --config config/webpack.preload.config.js",
-    "build": "npm-run-all build-main build-renderer build-preload",
-    "start": "electron dist/main.js",
-    "test": "jest --config ./config/jest.config.js",
-    "build:windows": "electron-builder --win --config.extraMetadata.directories.output=release/windows",
-    "build:linux": "electron-builder --linux --config.extraMetadata.directories.output=release/linux",
-    "build:all": "npm run build:windows && npm run build:linux"
+    "start": "webpack serve --config config/webpack.renderer.config.js",
+    "build": "webpack --config config/webpack.renderer.config.js",
+    "test": "jest --config ./config/jest.config.js"
   },
   "keywords": [],
   "author": "",
@@ -32,7 +22,6 @@
     "tailwindcss": "^3.4.14"
   },
   "devDependencies": {
-    "electron": "^33.2.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.26.0",
@@ -43,11 +32,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "babel-jest": "^29.7.0",
-    "concurrently": "^9.1.0",
-    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
-    "electron-builder": "^25.1.8",
-    "electron-reload": "^2.0.0-alpha.1",
     "html-webpack-plugin": "^5.6.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
@@ -71,7 +56,7 @@
       "package.json"
     ],
     "win": {
-      "target": "nsis" 
+      "target": "nsis"
     }
   }
 }
