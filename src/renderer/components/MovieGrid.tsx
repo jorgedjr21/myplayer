@@ -66,7 +66,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({searchQuery = ''}) => {
         >
           <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5 13a1 1 0 01-1 1H8a1 1 0 010-2h8a1 1 0 011 1zm-1-4a1 1 0 01-1 1H8a1 1 0 010-2h7a1 1 0 011 1zm-1-4a1 1 0 01-1 1H8a1 1 0 010-2h5a1 1 0 011 1z" />
         </svg>
-        <h3 className="text-xl font-semibold">No Movies Found</h3>
+        <h3 className="text-xl font-semibold">No Movies Found.</h3>
         <p className="text-gray-400 text-center max-w-md">
           We couldn't find any movies matching your search. Please try again with a different title.
         </p>
