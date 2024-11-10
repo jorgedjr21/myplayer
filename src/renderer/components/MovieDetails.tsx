@@ -8,12 +8,12 @@ import MovieInfo from './MovieDetails/MovieInfo';
 import Description from './MovieDetails/Description';
 import MediaTabs from './MovieDetails/MediaTabs';
 import Torrents from './MovieDetails/Torrents';
-import { MovieDetails } from '../../types/MovieDetails';
+import { MovieDetails as MovieDetailsType } from '../../types/MovieDetails'; // Renamed type import
 
 const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
-  const [movie, setMovie] = useState<MovieDetails | null>(null);
+  const [movie, setMovie] = useState<MovieDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
