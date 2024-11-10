@@ -5,9 +5,13 @@ import Spinner from './Spinner';
 import { fetchMovies } from '../../api/movies';
 import { Movie } from '../../types/Movie';
 
+interface MovieGridProps {
+  searchQuery?: string;
+}
+
 const MOVIES_PER_PAGE = 15;
 
-const MovieGrid: React.FC = () => {
+const MovieGrid: React.FC<MovieGridProps> = ({searchQuery = ''}) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -16,9 +20,10 @@ const MovieGrid: React.FC = () => {
 
   useEffect(() => {
     const loadMovies = async () => {
+      console.log('Fetching movies with searchQuery:', searchQuery);
       setLoading(true);
       try {
-        const { movies: fetchedMovies, movieCount } = await fetchMovies(page, MOVIES_PER_PAGE);
+        const { movies: fetchedMovies, movieCount } = await fetchMovies(page, MOVIES_PER_PAGE, searchQuery);
 
         setMovies(fetchedMovies);
         setTotalPages(Math.ceil(movieCount  / MOVIES_PER_PAGE));
@@ -31,7 +36,7 @@ const MovieGrid: React.FC = () => {
     };
 
     loadMovies();
-  }, [page]);
+  }, [page, searchQuery]);
 
   const goToNextPage = () => {
     if (page < totalPages) setPage(page + 1);
@@ -51,7 +56,22 @@ const MovieGrid: React.FC = () => {
   }
 
   if (movies.length === 0) {
-    return <div className="text-center text-white mt-10">No movies found.</div>;
+    return (
+      <div className="flex flex-col items-center justify-center h-64 bg-gray-800 rounded-lg shadow-md p-6 text-white mt-10 space-y-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          className="w-12 h-12 text-red-500"
+        >
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5 13a1 1 0 01-1 1H8a1 1 0 010-2h8a1 1 0 011 1zm-1-4a1 1 0 01-1 1H8a1 1 0 010-2h7a1 1 0 011 1zm-1-4a1 1 0 01-1 1H8a1 1 0 010-2h5a1 1 0 011 1z" />
+        </svg>
+        <h3 className="text-xl font-semibold">No Movies Found</h3>
+        <p className="text-gray-400 text-center max-w-md">
+          We couldn't find any movies matching your search. Please try again with a different title.
+        </p>
+      </div>
+    )
   }
 
   return (

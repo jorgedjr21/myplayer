@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, session } from 'electron';
 import * as path from 'path';
 import * as http from 'http';
 
@@ -8,6 +8,7 @@ function createWindow() {
     height: 900,
     icon: path.resolve(__dirname, 'assets/icons/pipoca.png'),
     webPreferences: {
+      autoplayPolicy: 'no-user-gesture-required',
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
@@ -56,7 +57,17 @@ app.on('before-quit', () => {
   }
 });
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+    if (permission === 'media') {
+      callback(true); // Allow media playback
+    } else {
+      callback(false); // Deny other permissions by default
+    }
+  });
+
+  createWindow();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();

@@ -1,14 +1,25 @@
-import { Movie, MoviesResponse } from '../types/Movie';
+import { MoviesResponse } from '../types/Movie';
 import { MovieDetails } from '../types/MovieDetails';
 
 const BASE_URL = 'https://yts.mx/api/v2';
 
-export const fetchMovies = async (page: number = 1, limit: number = 20): Promise<MoviesResponse> => {
+export const fetchMovies = async (page: number = 1, limit: number = 20, query: string = ''): Promise<MoviesResponse> => {
   try {
-    const response = await fetch(`${BASE_URL}/list_movies.json?page=${page}&limit=${limit}`);
+
+    const url = new URL(`${BASE_URL}/list_movies.json`);
+    url.searchParams.append('page', page.toString());
+    url.searchParams.append('limit', limit.toString());
+    if(query){
+      url.searchParams.append('query_term', query);
+    }
+    const response = await fetch(url.toString());
     const data = await response.json();
 
     if (data.status == 'ok') {
+
+      if(data.data.movie_count === 0) {
+        return { movies: [], movieCount: 0};
+      }
       const movies = data.data.movies.map((movie: any) => ({
         id: movie.id,
         title: movie.title,

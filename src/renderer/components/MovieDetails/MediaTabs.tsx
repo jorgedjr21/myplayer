@@ -1,6 +1,6 @@
 // src/renderer/components/MovieDetails/MediaTabs.tsx
 import React, { useState } from 'react';
-import YouTube from 'react-youtube';
+import YouTube, { YouTubeProps } from 'react-youtube';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -13,6 +13,14 @@ interface MediaTabsProps {
 }
 
 const MediaTabs: React.FC<MediaTabsProps> = ({ trailerCode, screenshots }) => {
+  const opts: YouTubeProps['opts'] = {
+    width: '100%',
+    height: '390',
+    playerVars: {
+      autoplay: 1,
+      mute: 0,  // Ensure that mute is disabled
+    },
+  };
   const [activeTab, setActiveTab] = useState<'trailer' | 'screenshots'>('trailer');
 
   return (
@@ -42,13 +50,7 @@ const MediaTabs: React.FC<MediaTabsProps> = ({ trailerCode, screenshots }) => {
         {activeTab === 'trailer' ? (
           <YouTube
             videoId={trailerCode}
-            opts={{
-              width: '100%',
-              height: '100%',
-              playerVars: {
-                autoplay: 0,
-              },
-            }}
+            opts={opts}
             className="w-full h-full object-cover"
           />
         ) : (

@@ -12,15 +12,17 @@
     "build-preload": "webpack --config config/webpack.preload.config.js",
     "build": "npm-run-all build-main build-renderer build-preload",
     "start": "electron dist/main.js",
-    "test": "jest --config ./config/jest.config.js"
+    "test": "jest --config ./config/jest.config.js",
+    "build:windows": "electron-builder --win --config.extraMetadata.directories.output=release/windows",
+    "build:linux": "electron-builder --linux --config.extraMetadata.directories.output=release/linux",
+    "build:all": "npm run build:windows && npm run build:linux"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Only for study",
   "dependencies": {
     "autoprefixer": "^10.4.20",
-    "electron": "^33.2.0",
     "postcss": "^8.4.47",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -30,6 +32,7 @@
     "tailwindcss": "^3.4.14"
   },
   "devDependencies": {
+    "electron": "^33.2.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.26.0",
@@ -43,6 +46,7 @@
     "concurrently": "^9.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
+    "electron-builder": "^25.1.8",
     "electron-reload": "^2.0.0-alpha.1",
     "html-webpack-plugin": "^5.6.3",
     "identity-obj-proxy": "^3.0.0",
@@ -57,5 +61,17 @@
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
+  },
+  "build": {
+    "appId": "com.example.myelectronplayern",
+    "productName": "My Electron Player",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis" 
+    }
   }
 }
