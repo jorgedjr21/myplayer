@@ -1,18 +1,30 @@
 import React from 'react';
+import SearchBar from './SearchBar';
+import { Link } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onSearch: (query: string) => void;
+}
+
+
+const Navbar: React.FC<NavbarProps> = ({onSearch}) => {
   return (
-    <header className="fixed top-0 w-full bg-gradient-to-b from-black via-transparent to-transparent z-10">
-      <div className="container mx-auto p-4 flex justify-between items-center">
-        <h1 className="font-bebas text-5xl font-bold text-red-600 custom-tracking">MyFlix</h1>
-        <nav className="space-x-4">
-          <a href="#home" className="text-gray-300 hover:text-white">Home</a>
-          <a href="#series" className="text-gray-300 hover:text-white">Series</a>
-          <a href="#movies" className="text-gray-300 hover:text-white">Movies</a>
-          <a href="#latest" className="text-gray-300 hover:text-white">Latest</a>
-        </nav>
+    <nav className="fixed top-0 left-0 w-full bg-black text-white p-4 flex items-center justify-between z-50 shadow-lg">
+      <div className="flex items-center space-x-4">
+        <Link to="/" className="text-2xl font-bold text-red-600">
+          MYFLIX
+        </Link>
+        <Link to="/" className="hover:text-gray-400">Home</Link>
+        <Link to="/series" className="hover:text-gray-400">Series</Link>
+        <Link to="/movies" className="hover:text-gray-400">Movies</Link>
+        <Link to="/latest" className="hover:text-gray-400">Latest</Link>
       </div>
-    </header>
+
+      {/* Add the SearchBar component here */}
+      <div className="w-1/3">
+        <SearchBar onSearch={onSearch} />
+      </div>
+    </nav>
   );
 };
 

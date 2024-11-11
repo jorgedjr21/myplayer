@@ -54,7 +54,7 @@ const MovieDetails: React.FC = () => {
 
   const handleOnPlay = (movie_hash) => {
     if (movie_hash && movie?.id) {
-      navigate(`/movie/${movie.id}/hash/${movie_hash}/play`);
+      window.open(`/#/movie/${movie.id}/hash/${movie_hash}/play`, '_blank');
     }
   }
 
@@ -76,9 +76,9 @@ const MovieDetails: React.FC = () => {
     {/* Main Content */}
     <div className="relative z-20 flex flex-col items-center w-11/12 max-w-2xl p-6 bg-black bg-opacity-80 rounded-lg shadow-lg mt-16 space-y-6 lg:max-w-5xl lg:p-12">
       <HeaderSection title={movie.title} likeCount={movie.like_count} availableQualities={movie.torrents} onPlay={handleOnPlay} />
-      
+
       <MovieInfo rating={movie.rating} runtime={movie.runtime} year={movie.year} genres={movie.genres} />
-      
+
       <MediaTabs trailerCode={movie.yt_trailer_code} screenshots={movie.screenshots} />
 
       {/* Description Section */}
@@ -87,7 +87,7 @@ const MovieDetails: React.FC = () => {
         ) : (
           <p className="text-gray-400 italic">No description available</p>
         )}
-      
+
     </div>
   </div>
   );
